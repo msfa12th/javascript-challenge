@@ -27,6 +27,8 @@ button.on("click", function() {
 
 });
 
+//create similar event handlers to filter data for other columns
+
 
 
 
