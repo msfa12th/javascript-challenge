@@ -13,42 +13,57 @@ var unqState = [...new Set(tableData.map(x => x.state))];
 var unqCountry = [...new Set(tableData.map(x => x.country))];
 var unqShape = [...new Set(tableData.map(x => x.shape))];
 
-var dateMenu = d3.select('#selectDate').append('option');
-dateMenu.selectAll('option')
-.data(unqDate)
-.enter()
-.append('option')
-.html(String);
+unqDate.sort();
+unqCity.sort();
+unqState.sort();
+unqCountry.sort();
+unqShape.sort();
+
+var dateMenu = d3.select('#selectDate');
+for ( var x=0; x<unqDate.length; x++) {
+    dateMenu.append('option').text(unqDate[x]);
+    // dateMenu.append('option').value(unqDate[x]);
+};
+
+var cityMenu = d3.select('#selectCity');
+for ( var x=0; x<unqCity.length; x++) {
+    cityMenu.append('option').text(unqCity[x]);
+};
+
+
+var stateMenu = d3.select('#selectState');
+for ( var x=0; x<unqState.length; x++) {
+    stateMenu.append('option').text(unqState[x]);
+};
+
+var countryMenu = d3.select('#selectCountry');
+for ( var x=0; x<unqCountry.length; x++) {
+    countryMenu.append('option').text(unqCountry[x]);
+    // countryMenu.append('option').value(unqCountry[x]);
+};
+
+
+var shapeMenu = d3.select('#selectShape');
+for ( var x=0; x<unqShape.length; x++) {
+    shapeMenu.append('option').text(unqShape[x]);
+    // shapeMenu.append('option').value(unqShape[x]);
+};
 
 
 //Click handler
 button.on("click", function() {
     d3.event.preventDefault();
-    var inputDateElement = d3.select(".form-date");
+    var inputDateElement = d3.select("#selectDate");
     var inputDateValue = inputDateElement.property("value");
-    var inputCityElement = d3.select(".form-city");
+    var inputCityElement = d3.select("#selectCity");
     var inputCityValue = inputCityElement.property("value");
-    var inputStateElement = d3.select(".form-state");
+    var inputStateElement = d3.select("selectState");
     var inputStateValue = inputStateElement.property("value");
-    var inputCountryElement = d3.select(".form-country");
+    var inputCountryElement = d3.select("#selectCountry");
     var inputCountryValue = inputCountryElement.property("value");
-    var inputShapeElement = d3.select(".form-shape");
+    var inputShapeElement = d3.select("#selectShape");
     var inputShapeValue = inputShapeElement.property("value");
 
-
-    //instead of individual I think i can use this
-    var inputElems = d3.selectAll("input");
-
-    inputElems.on("change", function(d, i) {   // ** Highlight Change **
-        // do something here
-   });
-
-
-   function inputChange() {
-       alert(this.value);   // ** Highlight this.value **
-   }
-   
-   inputElems.on("change", inputChange);
     console.log(inputDateValue);
     console.log(inputCityValue);
     console.log(inputStateValue);
