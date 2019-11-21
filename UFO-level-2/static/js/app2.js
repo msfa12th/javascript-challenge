@@ -13,6 +13,13 @@ var unqState = [...new Set(tableData.map(x => x.state))];
 var unqCountry = [...new Set(tableData.map(x => x.country))];
 var unqShape = [...new Set(tableData.map(x => x.shape))];
 
+var dateMenu = d3.select('#selectDate').append('option');
+dateMenu.selectAll('option')
+.data(unqDate)
+.enter()
+.append('option')
+.html(String);
+
 
 //Click handler
 button.on("click", function() {
