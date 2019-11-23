@@ -19,6 +19,14 @@ unqState.sort();
 unqCountry.sort();
 unqShape.sort();
 
+tableData.forEach(function(tableData) {
+    var row = tbody.append("tr");
+    Object.entries(tableData).forEach(([key,value])=>{
+        var cell = row.append("td");
+        cell.text(value);
+    });
+});
+
 var dateMenu = d3.select('#selectDate');
 dateMenu.on("change", dropdownDateChange);
 for ( var x=0; x<unqDate.length; x++) {
@@ -43,7 +51,6 @@ var countryMenu = d3.select('#selectCountry');
 countryMenu.on("change", dropdownCountryChange);
 for ( var x=0; x<unqCountry.length; x++) {
     countryMenu.append('option').text(unqCountry[x]);
-    // countryMenu.append('option').value(unqCountry[x]);
 };
 
 
@@ -51,7 +58,6 @@ var shapeMenu = d3.select('#selectShape');
 shapeMenu.on("change", dropdownShapeChange);
 for ( var x=0; x<unqShape.length; x++) {
     shapeMenu.append('option').text(unqShape[x]);
-    // shapeMenu.append('option').value(unqShape[x]);
 };
 
 // set default values for drop down menus
@@ -68,28 +74,28 @@ var filteredCountry = filteredState;
 var filteredShape = filteredCountry;
 
 
-var dropdownDateChange = function() {
+function dropdownDateChange() {
     inputDateValue = dateMenu.property("value");
     console.log("Date change");
 }
 
-var dropdownCityChange = function() {
+function dropdownCityChange() {
     inputCityValue = d3.select(this).property('value');
     tbody.selectAll("tr").remove();
 }
 
-var dropdownStateChange = function() {
+function dropdownStateChange() {
     inputStateValue = d3.select(this).property('value');
     tbody.selectAll("tr").remove();
 }
 
-var dropdownCountryChange = function() {
+function dropdownCountryChange() {
     inputCountryValue = d3.select(this).property('value');
     tbody.selectAll("tr").remove();
 }
 
 
-var dropdownShapeChange = function() {
+function dropdownShapeChange() {
     inputShapeValue = d3.select(this).property('value');
     tbody.selectAll("tr").remove();
 }
@@ -99,9 +105,11 @@ button.on("click", function() {
 
     d3.event.preventDefault();
     console.log("Hello world, butto click")
+    
     //clear out values on the form
     //need to delete rows from previous query
     tbody.selectAll("tr").remove();
+    console.log("remove the rows? before filtering");
     
 
     if (inputDateValue != 'All Dates') {
