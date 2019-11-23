@@ -20,23 +20,27 @@ unqCountry.sort();
 unqShape.sort();
 
 var dateMenu = d3.select('#selectDate');
+dateMenu.on("change", dropdownDateChange);
 for ( var x=0; x<unqDate.length; x++) {
     dateMenu.append('option').text(unqDate[x]);
-    // dateMenu.append('option').value(unqDate[x]);
+    dateMenu.append('option').attr("value", unqDate[x]);
 };
 
 var cityMenu = d3.select('#selectCity');
+cityMenu.on("change", dropdownCityChange);
 for ( var x=0; x<unqCity.length; x++) {
     cityMenu.append('option').text(unqCity[x]);
 };
 
 
 var stateMenu = d3.select('#selectState');
+stateMenu.on("change", dropdownStateChange);
 for ( var x=0; x<unqState.length; x++) {
     stateMenu.append('option').text(unqState[x]);
 };
 
 var countryMenu = d3.select('#selectCountry');
+countryMenu.on("change", dropdownCountryChange);
 for ( var x=0; x<unqCountry.length; x++) {
     countryMenu.append('option').text(unqCountry[x]);
     // countryMenu.append('option').value(unqCountry[x]);
@@ -44,38 +48,99 @@ for ( var x=0; x<unqCountry.length; x++) {
 
 
 var shapeMenu = d3.select('#selectShape');
+shapeMenu.on("change", dropdownShapeChange);
 for ( var x=0; x<unqShape.length; x++) {
     shapeMenu.append('option').text(unqShape[x]);
     // shapeMenu.append('option').value(unqShape[x]);
 };
 
+// set default values for drop down menus
+var inputDateValue = "All Dates";
+var inputCityValue = "All Cities";
+var inputStateValue = "All States";
+var inputCountryValue = "All Countries";
+var inputShapeValue = "All Shapes";
+
+var filteredDate = tableData;
+var filteredCity = filteredDate;
+var filteredState = filteredCity;
+var filteredCountry = filteredState;
+var filteredShape = filteredCountry;
+
+
+var dropdownDateChange = function() {
+    inputDateValue = dateMenu.property("value");
+    console.log("Date change");
+}
+
+var dropdownCityChange = function() {
+    inputCityValue = d3.select(this).property('value');
+    tbody.selectAll("tr").remove();
+}
+
+var dropdownStateChange = function() {
+    inputStateValue = d3.select(this).property('value');
+    tbody.selectAll("tr").remove();
+}
+
+var dropdownCountryChange = function() {
+    inputCountryValue = d3.select(this).property('value');
+    tbody.selectAll("tr").remove();
+}
+
+
+var dropdownShapeChange = function() {
+    inputShapeValue = d3.select(this).property('value');
+    tbody.selectAll("tr").remove();
+}
 
 //Click handler
 button.on("click", function() {
+
     d3.event.preventDefault();
-    var inputDateElement = d3.select("#selectDate");
-    var inputDateValue = inputDateElement.property("value");
-    var inputCityElement = d3.select("#selectCity");
-    var inputCityValue = inputCityElement.property("value");
-    var inputStateElement = d3.select("selectState");
-    var inputStateValue = inputStateElement.property("value");
-    var inputCountryElement = d3.select("#selectCountry");
-    var inputCountryValue = inputCountryElement.property("value");
-    var inputShapeElement = d3.select("#selectShape");
-    var inputShapeValue = inputShapeElement.property("value");
-
-    console.log(inputDateValue);
-    console.log(inputCityValue);
-    console.log(inputStateValue);
-    console.log(inputCountryValue);
-    console.log(inputShapeValue);
-
+    console.log("Hello world, butto click")
     //clear out values on the form
-    //d3.select("ul").html("");
     //need to delete rows from previous query
     tbody.selectAll("tr").remove();
     
-    var filteredData = tableData.filter(tableData => tableData.datetime === inputDateValue);
+
+    if (inputDateValue != 'All Dates') {
+        filteredDate = tableData.filter(tableData => tableData.datetime === inputDateValue);
+    }
+    else {
+        filteredDate = tableData;
+    };
+
+    if (inputCityValue != 'All Cities') {
+        filteredCity = filteredDate.filter(filteredDate => filteredDate.city === inputCityValue);
+    }
+    else {
+        filteredCity = filteredDate;
+    };   
+
+    if (inputStateValue != 'All States') {
+        filteredState = filteredCity.filter(filteredCity => filteredCity.state === inputStateValue);
+    }
+    else {
+        filteredState = filteredCity;
+    };   
+
+    if (inputCountryValue != 'All Countries') {
+        filteredCountry = filteredState.filter(filteredState => filteredState.country === inputCountryValue);
+    }
+    else {
+        filteredCountry = filteredState;
+    };   
+
+    if (inputShapeValue != 'All Shapes') {
+        filteredShape = filteredCountry.filter(filteredCountry => filteredCountry.shape === inputShapeValue);
+    }
+    else {
+        filteredShape = filteredCountry;
+    };   
+
+    filteredData = filteredShape;
+
     filteredData.forEach(function(filteredData) {
         var row = tbody.append("tr");
         Object.entries(filteredData).forEach(([key,value])=>{
@@ -83,11 +148,4 @@ button.on("click", function() {
             cell.text(value);
         });
     });
-
-});
-
-//create similar event handlers to filter data for other columns
-
-
-
-
+})
