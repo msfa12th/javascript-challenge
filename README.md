@@ -11,10 +11,9 @@ Use Javascript to create a data-driven interactive web page.
 ### UFO Level 1
 Load data from file into table on the web page.  Then allow user to filter the data by the Date field
 
+![UFO Level 1 webpage output](images/ufo1.png)
+
 ### UFO Level 2
 Load data from file into table on the web page.  Then allow user to filter the data by multiple fields (date, city, state, country, shape)
 
-## Web Page Output
-
-![UFO Level 1 webpage output](images/ufo1.png)
 ![UFO Level 2 webpage output](images/ufo2.png)
