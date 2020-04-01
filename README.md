@@ -6,7 +6,7 @@
 
 ## Summary
 
-A web application that uses Javascript, D3 and Javascript libraries (bootstrap and googleapis) to create a data-driven interactive web page, hosted on local server via "python -m http.server".  A dynamic table is loaded with data from a file and then form input is used to filter the data displaye.
+A web application that uses Javascript, D3 and Javascript libraries (bootstrap and googleapis) to create a data-driven interactive web page, hosted on local server via "python -m http.server".  A dynamic table is loaded with data from a file and then form input is used to filter the data displayed.
 
 ### UFO Level 1
 Load data from file into table on the web page.  Then allow user to filter the data by the Date field
