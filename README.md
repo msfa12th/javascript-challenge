@@ -6,7 +6,7 @@
 
 ## Summary
 
-Use Javascript to create a data-driven interactive web page, hosted on local server via "python http.server"
+Use Javascript to create a data-driven interactive web page, hosted on local server via "python -m http.server"
 
 ### UFO Level 1
 Load data from file into table on the web page.  Then allow user to filter the data by the Date field
